@@ -24,14 +24,14 @@ class HouseController {
    // Criar uma casa/anúncio
    async store(req, res) {
       const { filename } = req.file;
-      const { descrioption, price, location, status } = req.body;
+      const { description, price, location, status } = req.body;
       const { user_id } = req.headers;
 
       // cadastrando uma casa
       const house = await House.create({
          user: user_id,
          thumbnail: filename,
-         descrioption,
+         description,
          price,
          location,
          status,
@@ -44,13 +44,13 @@ class HouseController {
    async update(req, res) {
       const { filename } = req.file;
       const { house_id } = req.params;
-      const { descrioption, price, location, status } = req.body;
+      const { description, price, location, status } = req.body;
       const { user_id } = req.headers;
 
       const user = await User.findById(user_id);
       const houses = await House.findById(house_id);
 
-      // Verificando se o usuário que estar tentando atualizar é o mesmo que cadastrou
+      // Verificando se o usuário logado  é o mesmo que cadastrou a casa
       if (String(user._id) !== String(houses.user)) {
          return res.status(401).json({ error: 'Não autorizado!' })
       }
@@ -59,7 +59,7 @@ class HouseController {
       await House.updateOne({ _id: house_id }, {
          user: user_id,
          thumbnail: filename,
-         descrioption,
+         description,
          price,
          location,
          status,
@@ -68,7 +68,24 @@ class HouseController {
       return res.send();
    }
 
-   // Excluindo uma casa/
+   // Excluindo uma casa/anúncio
+   async destroy(req, res) {
+      const { house_id } = req.body;
+      const { user_id } = req.headers;
+
+      const user = await User.findById(user_id);
+      const houses = await House.findById(house_id);
+
+      // Verificando se o usuário logado  é o mesmo que cadastrou a casa
+      if (String(user._id) !== String(houses.user)) {
+         return res.status(401).json({ error: 'Não autorizado!' });
+      }
+
+      // Excluindo
+      await House.findByIdAndDelete({ _id: house_id });
+
+      return res.json({ message: 'Excluida com sucesso!' });
+   }
 }
 
 export default new HouseController();
