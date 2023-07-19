@@ -38,6 +38,26 @@ class HouseController {
 
       return res.json(house);
    }
+
+   // Atualizando uma casa/anúncio
+   async update(req, res) {
+      const { filename } = req.file;
+      const { house_id } = req.params;
+      const { descrioption, price, location, status } = req.body;
+      const { user_id } = req.headers;
+
+      // Atualizando informações da casa
+      const houses = await House.updateOne({ _id: house_id }, {
+         user: user_id,
+         thumbnail: filename,
+         descrioption,
+         price,
+         location,
+         status,
+      })
+
+      return res.json(houses);
+   }
 }
 
 export default new HouseController();
