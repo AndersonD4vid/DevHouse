@@ -10,6 +10,11 @@ momento.
 casas quando quiser. Casas cadastradas devem conter uma foto de capa, descrição,
 localização, preço da diária e o status (Disponível ou indisponível).
 
+## Tecnologias usadas no projeto
+Node.Js, MongoDB.
+
+[![My Skills](https://skillicons.dev/icons?i=nodejs,mongodb&perline=10)](https://skillicons.dev)
+
 
 ## Iniciando o projeto
 - yarn dev ou npm run dev
