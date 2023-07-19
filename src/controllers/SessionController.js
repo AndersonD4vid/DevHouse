@@ -14,13 +14,12 @@ class SessionController {
       const { email } = req.body;
 
       let user = await User.findOne({ email });
-
-      // verificando se um usuário já existe, se não exister vai criar um usuário novo
+      // verificando se um usuário já existe, se não exister vai criar um novo usuário 
       if (!user) {
          user = await User.create({ email });
       }
 
-      // se existir ele vai apenas retornar
+      // se existir ele vai apenas retornar, simbolizando como logado
       return res.json(user)
    }
 }

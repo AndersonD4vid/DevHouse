@@ -21,3 +21,4 @@ localização, preço da diária e o status (Disponível ou indisponível).
 - sucrase: é uma alternativa ao Babel que permite um desenvolvimento muito rápido. O sucrase assume que você está desenvolvendo em um navegador recente ou em uma versão recente do Node.js, acelerando a sua experiência em desenvolvimento.
 - mongoose: É uma biblioteca de programação orientada a objetos JavaScript que cria uma conexão entre o MongoDB e o ambiente de tempo de execução JavaScript Node.js, assim
 facilitando a gente trabalhar com o banco de dados.
+- multer: O Multer é um middleware que vai interceptar o upload e salvar o arquivo em uma pasta do disco
