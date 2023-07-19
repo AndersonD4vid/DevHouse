@@ -1,6 +1,7 @@
 import express from 'express';
 import routes from './routes';
 import mongoose from 'mongoose';
+import cors from 'cors';
 import path from 'path';
 
 class App {
@@ -15,6 +16,9 @@ class App {
    }
 
    middlewares() {
+      // passando dessa maneira estamos liberando a API para qualquer um usar
+      this.server.use(cors());
+
       this.server.use(
          '/files',
          express.static(path.resolve(__dirname, '..', 'uploads'))
