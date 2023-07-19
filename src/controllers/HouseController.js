@@ -8,6 +8,7 @@
 */
 
 import House from "../models/House";
+import User from "../models/User";
 
 class HouseController {
 
@@ -46,8 +47,16 @@ class HouseController {
       const { descrioption, price, location, status } = req.body;
       const { user_id } = req.headers;
 
+      const user = await User.findById(user_id);
+      const houses = await House.findById(house_id);
+
+      // Verificando se o usuário que estar tentando atualizar é o mesmo que cadastrou
+      if (String(user._id) !== String(houses.user)) {
+         return res.status(401).json({ error: 'Não autorizado!' })
+      }
+
       // Atualizando informações da casa
-      const houses = await House.updateOne({ _id: house_id }, {
+      await House.updateOne({ _id: house_id }, {
          user: user_id,
          thumbnail: filename,
          descrioption,
@@ -56,8 +65,10 @@ class HouseController {
          status,
       })
 
-      return res.json(houses);
+      return res.send();
    }
+
+   // Excluindo uma casa/
 }
 
 export default new HouseController();
