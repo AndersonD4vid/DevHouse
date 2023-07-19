@@ -7,13 +7,25 @@
    destroy: deletar uma sessão
 */
 
+import House from "../models/House";
 
 class HouseController {
    async store(req, res) {
-      console.log(req.body);
-      console.log(req.file);
+      const { filename } = req.file;
+      const { descrioption, price, location, status } = req.body;
+      const { user_id } = req.headers;
 
-      return res.json({ ok: true })
+      // cadastrando uma casa
+      const house = await House.create({
+         user: user_id,
+         thumbnail: filename,
+         descrioption,
+         price,
+         location,
+         status,
+      })
+
+      return res.json(house);
    }
 }
 
