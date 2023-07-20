@@ -3,6 +3,19 @@ import User from '../models/User';
 import House from '../models/House';
 
 class ReservaController {
+
+   // Listando reservas do usuário
+   async index(req, res) {
+      const { user_id } = req.headers;
+
+      // Procurando reservas onde o usuário estar logado
+      const reservas = await Reserva.find({ user: user_id }).populate('house');
+
+      return res.json(reservas);
+
+   }
+
+
    async store(req, res) {
       const { user_id } = req.headers;
       const { house_id } = req.params;
@@ -38,6 +51,15 @@ class ReservaController {
       await reserva.populate(["house", "user"]);
 
       return res.json(reserva);
+   }
+
+   // Cancelar uma reserva
+   async destroy(req, res) {
+      const { reserva_id } = req.body;
+
+      await Reserva.findByIdAndDelete({ _id: reserva_id });
+
+      return res.send();
    }
 }
 
