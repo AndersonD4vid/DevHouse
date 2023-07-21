@@ -33,3 +33,9 @@ facilitando a gente trabalhar com o banco de dados.
 - multer: O Multer é um middleware que vai interceptar o upload e salvar o arquivo em uma pasta do disco.
 - CORS: É um mecanismo que permite que recursos restritos em uma página da web sejam recuperados por outro domínio fora do domínio ao qual pertence o recurso que será recuperado. Podemos ter controle e limitar requisições.
 - yup: É um construtor de Schema JavaScript para validações de Schemas.
+
+# Designer do projeto
+<div>
+  <img src="./Imagens do projeto/devHouse01.png" />
+  <img src="./Imagens do projeto/devHouse02.png" />
+</div>
